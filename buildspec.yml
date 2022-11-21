@@ -14,7 +14,7 @@ phases:
        - echo build
        - pip install -r requirements.txt
        - ls -la
-       - zip ${LAMBDA_CODE_ZIP_FILE_NAME} test.py
+       - zip ${LAMBDA_CODE_ZIP_FILE_NAME} *
   post_build:
     commands:
        - echo post_build
