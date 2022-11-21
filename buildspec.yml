@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo install
+  pre_build:
+    commands:
+       - echo pre_build
+  build:
+    commands:
+       - echo build
+       - pip install -r requirements.txt
+       - ls -la
+       - zip ${LAMBDA_CODE_ZIP_FILE_NAME} test.py
+  post_build:
+    commands:
+       - echo post_build
+       - aws lambda update-function-code --function-name  ${LAMBDA_FUNCTION_NAME} --zip-file fileb://${LAMBDA_CODE_ZIP_FILE_NAME} --region ${LAMBDA_REGION}
