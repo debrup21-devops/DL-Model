@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM public.ecr.aws/lambda/python:3.8
 
 RUN python3 -m pip install --upgrade pip
 RUN mkdir DL_Model
