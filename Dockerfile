@@ -8,4 +8,4 @@ RUN ls -l
 RUN python3 -m venv venv
 RUN . venv/bin/activate
 RUN pip3 install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
-CMD ["lambda-function.lambda_handler"]
+CMD ["lambda.lambda_handler"]
