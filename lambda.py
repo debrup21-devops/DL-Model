@@ -11,5 +11,5 @@ def lambda_handler(event, context):
 #     s3_files = response["Contents"]
 #     image = open(s3_files[0], "rb")
     file_path = "https://dl-model-aws-connection-image-bucket.s3.eu-west-2.amazonaws.com/track.jpeg"
-    data  = subprocess.run(["detect.py", "--weights", "yolov5x.pt", "--source", file_path], capture_output=True)
+    data  = subprocess.run(["python3", "detect.py", "--weights", "yolov5x.pt", "--source", file_path], capture_output=True)
     return json.dumps(data)
