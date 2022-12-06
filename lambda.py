@@ -14,4 +14,4 @@ def lambda_handler(event, context):
     data  = subprocess.run(["python3", "detect.py", "--weights", "yolov5x.pt", "--source", file_path], capture_output=True)
     print(data)
     
-    return json.dumps({"result": dict(data)})
+    return json.dumps({"result": data.__dict__})
