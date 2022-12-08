@@ -25,8 +25,8 @@ def lambda_handler(event, context):
     print(last_added)
     file_path = "https://dl-model-aws-connection-image-bucket.s3.eu-west-2.amazonaws.com/" + last_added
     data  = subprocess.run(["python3", "detect.py", "--weights", "yolov5x.pt", "--source", file_path,  "--save-txt"], capture_output=True)
-    save_file(data, 0)
+    save_file(data, "a")
     data = subprocess.run(["ls", "-l"], capture_output=True)
-    save_file(data, 1)
+    save_file(data, "b")
     
     return json.dumps({"result": "Working"})
