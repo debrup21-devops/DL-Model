@@ -6,6 +6,17 @@ import subprocess
 import json
 
 
+def save_file(context, i):
+    string = context
+    encoded_string = string.encode("utf-8")
+    bucket_name = "dl-model-aws-connection-image-bucket"
+    file_name = "hello"+i".txt"
+    s3_path = "outputs/" + file_name
+
+    s3 = boto3.resource("s3")
+    s3.Bucket(bucket_name).put_object(Key=s3_path, Body=encoded_string)
+
+
 def lambda_handler(event, context):
     get_last_modified = lambda obj: int(obj['LastModified'].strftime('%s'))
     s3 = boto3.client('s3')
@@ -14,7 +25,8 @@ def lambda_handler(event, context):
     print(last_added)
     file_path = "https://dl-model-aws-connection-image-bucket.s3.eu-west-2.amazonaws.com/" + last_added
     data  = subprocess.run(["python3", "detect.py", "--weights", "yolov5x.pt", "--source", file_path,  "--save-txt"], capture_output=True)
-    print(data)
-    print(subprocess.run(["ls", "-l"]), capture_output=True)
+    save_file(data, 0)
+    data = subprocess.run(["ls", "-l"]), capture_output=True)
+    save_file(data, 1)
     
     return json.dumps({"result": "Working"})
