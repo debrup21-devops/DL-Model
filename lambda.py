@@ -10,7 +10,7 @@ def save_file(context, i):
     string = context
     encoded_string = string.encode("utf-8")
     bucket_name = "dl-model-aws-connection-image-bucket"
-    file_name = "hello"+i".txt"
+    file_name = "hello"+i+".txt"
     s3_path = "outputs/" + file_name
 
     s3 = boto3.resource("s3")
