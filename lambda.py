@@ -23,8 +23,9 @@ def lambda_handler(event, context):
     last_added = [obj['Key'] for obj in sorted(objs, key=get_last_modified)][-1]
     print(last_added)
     file_path = "https://dl-model-aws-connection-image-bucket.s3.eu-west-2.amazonaws.com/" + last_added
-    data  = subprocess.run(["python3", "detect.py", "--weights", "yolov5x.pt", "--source", file_path,  "--save-txt"], universal_newlines = True, stdout = subprocess.PIPE)
+    data  = subprocess.run(["python3", "detect.py", "--weights", "yolov5x.pt", "--source", file_path,  "--save-txt"], universal_newlines = True, stdout = subprocess.PIPE, stderr=subprocess.PIPE)
     save_file(data.stdout, "a")
+    save_file(data.stderr, "c")
     data = subprocess.run(["ls", "-l"], universal_newlines = True, stdout = subprocess.PIPE)
     save_file(data.stdout, "b")
     
