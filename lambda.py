@@ -1,5 +1,5 @@
 import os 
-os.environ['MPLCONFIGDIR'] = os.getcwd() + "/configs/"
+os.environ['MPLCONFIGDIR'] = os.getcwd()
 import detect
 import boto3
 import subprocess 
